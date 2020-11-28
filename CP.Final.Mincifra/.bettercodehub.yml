@@ -1,0 +1,2 @@
+exclude:
+- .*/src\CP.Final.Mincifra.Web\wwwroot\lib\**\*
