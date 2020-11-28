@@ -53,13 +53,13 @@ export class Field implements MessageContentGenerics{
     {
         if(type == 'INTEGER')
         {
-            return 'I';
+            return 'C';
         }
         else if(type == 'VARCHAR')
         {
             return 'S';
         }
-        return '?';
+        return '';
     }
 
 }

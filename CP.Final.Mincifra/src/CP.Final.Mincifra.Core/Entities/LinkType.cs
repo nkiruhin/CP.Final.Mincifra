@@ -1,0 +1,32 @@
+﻿namespace CP.Final.Mincifra.Core.Entities
+{
+    public enum LinkType
+    {
+        Unknown,
+        Resides,
+        MayHave,
+        LocatedOnTheTerritory,
+        MayLiveIn,
+        MayUse,
+        MayRegister,
+        MayOwn,
+        May,
+        RegistersIn,
+        Manages,
+        CanBeACitizen,
+        WorksIn,
+        MayContact,
+        CalculatedBy,
+        Receives,
+        MayWork,
+        MayBe,
+        Has,
+        CarriedOutBy,
+        MayVisit,
+        Provides,
+        Includes,
+        TerritorialUnit,
+        ConsistsOf,
+        IsAn
+    }
+}

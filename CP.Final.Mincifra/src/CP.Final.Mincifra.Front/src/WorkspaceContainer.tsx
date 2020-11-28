@@ -13,6 +13,7 @@ import { Settings } from "./Settings";
 import {Messenger} from "./helpers/Messenger";
 import {ErdDiagramModel} from "./nodes/ErdDiagramModel";
 import {Renderer} from "./renderer";
+import { loadNodes } from "./main";
 
 /**
  * Tests auto distribution
@@ -27,6 +28,7 @@ export class WorkspaceContainer extends React.Component<{ model: ErdDiagramModel
         this.zoom = this.zoom.bind(this);
         this.zoomOut = this.zoomOut.bind(this);
         this.zoomIn = this.zoomIn.bind(this);
+        this.find = this.find.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -47,14 +49,6 @@ export class WorkspaceContainer extends React.Component<{ model: ErdDiagramModel
         distributeEngine.redistribute(this.props.model);
         this.reroute();
         Renderer.done(this.props.model);
-        /*
-        this.engine.redistribute(this.props.model);
-
-        // only happens if pathfing is enabled (check line 25)
-        this.reroute();
-        this.props.engine.repaintCanvas();
-        this.props.engine.getModel().setZoomLevel(Settings.defaultZoomLevel);
-        */
     };
 
     componentDidMount(): void {
@@ -100,7 +94,8 @@ export class WorkspaceContainer extends React.Component<{ model: ErdDiagramModel
         this.zoom(1.1);
     }
     find() {
-        console.log("")
+        console.log(this.state)
+        loadNodes(this.state.searchValue)
     }
 
     render()

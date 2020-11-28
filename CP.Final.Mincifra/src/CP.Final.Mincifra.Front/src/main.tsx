@@ -8,7 +8,7 @@ import { ErdDiagramModel } from "./nodes/ErdDiagramModel";
 import fetchApi from './services/fetcher';
 
 console.log(location.search);
-const url = "http://localhost:57679/api/Nodes"
+const url = "http://localhost:5000/api/Nodes/"
 
 
 
@@ -21,8 +21,8 @@ interface IData {
 }
 
 
-let loadNodes = async () => {
-	const response = await fetchApi(null, url, "GET");
+export const loadNodes = async (search: string) => {
+	const response = await fetchApi(null, url + search , "GET");
 	let data = response.data as IData;
 	Renderer.clear(model);
 
@@ -40,28 +40,4 @@ let loadNodes = async () => {
 	}, 100);
 
 };
-loadNodes();
-
-//console.log("Register model added listener");
-//Messenger.onReceive('model_added', (message : Message<Table>) => {
-//	Renderer.nodeIndex++;
-//	Renderer.addNode(model, Table.fromJson(message.content), Renderer.nodeIndex);
-//});
-
-
-//console.log("Register property added listener");
-//Messenger.onReceive('property_added', (message : Message<Field>) => {
-//	console.log("Messenger.onReceive().property_added");
-//	console.log("\t", JSON.stringify(message.content));
-
-//	console.log("erd-tool -> property_added -> " + JSON.stringify(message.content));
-//	Renderer.addProperty(model, Field.fromJson(message.content));
-//	Renderer.done(model);
-//});
-
-//Messenger.onReceive('property_deleted', (message : Message<Field>) => {
-//	console.log("Messenger.onReceive().property_deleted");
-//	console.log("\t", JSON.stringify(message.content));
-//	// loadNodes();
-//	Renderer.removeField(model, Field.fromJson(message.content));
-//});
+loadNodes('');

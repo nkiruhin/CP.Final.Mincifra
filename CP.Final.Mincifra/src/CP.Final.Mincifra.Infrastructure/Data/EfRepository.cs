@@ -19,12 +19,12 @@ namespace CP.Final.Mincifra.Infrastructure.Data
             _dbContext = dbContext;
         }
 
-        public T GetById<T>(int id) where T : BaseEntity
+        public T GetById<T>(Guid id) where T : BaseEntity
         {
             return _dbContext.Set<T>().SingleOrDefault(e => e.Id == id);
         }
 
-        public Task<T> GetByIdAsync<T>(int id) where T : BaseEntity
+        public Task<T> GetByIdAsync<T>(Guid id) where T : BaseEntity
         {
             return _dbContext.Set<T>().SingleOrDefaultAsync(e => e.Id == id);
         }

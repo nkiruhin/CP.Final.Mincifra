@@ -20,4 +20,8 @@
     <ProjectReference Include="..\CP.Final.Mincifra.Core\CP.Final.Mincifra.Core.csproj" />
     <ProjectReference Include="..\CP.Final.Mincifra.SharedKernel\CP.Final.Mincifra.SharedKernel.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Data\Config\" />
+  </ItemGroup>
 </Project>

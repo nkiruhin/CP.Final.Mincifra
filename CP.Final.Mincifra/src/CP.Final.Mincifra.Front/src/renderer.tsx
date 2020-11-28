@@ -49,7 +49,7 @@ export class Renderer {
     static addLink(model:ErdDiagramModel, tableFrom:string, fieldFrom:string, tableTo:string, fieldTo:string):void
     {
         console.log('ERD', 'Renderer.addLink()', tableFrom, fieldFrom, tableTo, fieldTo);
-
+        const pathfinding = engine.getLinkFactories().getFactory<PathFindingLinkFactory>(PathFindingLinkFactory.NAME);
         const portOut = ErdNodeModel.getPortFromRegister(ErdNodeModel.makePortName(tableFrom, fieldFrom, 'out'));
         const portTo = ErdNodeModel.getPortFromRegister(ErdNodeModel.makePortName(tableTo, fieldTo, 'in'));
         const link = new DefaultLinkModel();

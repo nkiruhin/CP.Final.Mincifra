@@ -25,9 +25,9 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Compile Update="Endpoints\ToDoItems\Update.NewToDoItemRequest.cs">
-      <DependentUpon>Update.cs</DependentUpon>
-    </Compile>
+    <None Update="database.sqlite">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -40,8 +40,7 @@ namespace CP.Final.Mincifra.Web
 
             services.AddDbContext(connectionString);
 
-            services.AddControllersWithViews().AddNewtonsoftJson();
-            services.AddRazorPages();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddCors();
             services.AddSwaggerGen(c =>
             {
@@ -79,7 +78,6 @@ namespace CP.Final.Mincifra.Web
             }
             app.UseRouting();
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
@@ -87,15 +85,17 @@ namespace CP.Final.Mincifra.Web
             app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"));
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = "swagger";
+            });
             app.UseCors(builder => builder
                 .AllowAnyOrigin()
                 .AllowAnyHeader()
             );
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute();
-                endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }
