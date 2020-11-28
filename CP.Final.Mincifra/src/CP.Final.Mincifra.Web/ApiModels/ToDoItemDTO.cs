@@ -29,30 +29,51 @@ namespace CP.Final.Mincifra.Web.ApiModels
     }
 
     public class EntityDTO
-    {
-        public Guid Id { get; set; }
-        [Required]
-        public string Name { get; set; } = string.Empty;
-        public string ClassName { get; set; } = string.Empty;
-        public string Description { get; set; }
-        public DateTime CreationDate { get; set; }
-        public DateTime LastEditDate { get; set; }
-        public bool IsDeleted { get; set; }
-        public List<MetaData> MetaDatas { get; set; }
+    {        
+        public Guid Name { get; set; }
+        public string Title { get; set; } 
+        public string Api_description { get; set; }
+        public List<MetadataDto> Fields { get; set; }
 
         public static EntityDTO FromEntity(Entity item)
         {
-            return new EntityDTO()
+            var entity = new EntityDTO()
             {
-                Id = item.Id,
-                Name = item.Name,
-                Description = item.Description,
-                CreationDate = item.CreationDate,
-                LastEditDate = item.LastEditDate,
-                IsDeleted = item.IsDeleted,
-                MetaDatas = item.MetaDatas,
-                ClassName = item.ClassName
+                Name = item.Id,
+                Title = item.Name,
+                Api_description = item.Description,
+                Fields = item.MetaDatas.Any() ? item.MetaDatas.Select((x, Index) => new MetadataDto
+                {
+                    Id = Index + 1,
+                    Table_name = item.Id.ToString(),
+                    Name = x.Id.ToString(),
+                    Label = x.Key,
+                    Type = x.Type
+                }).ToList() : new List<MetadataDto>
+                {
+                    new MetadataDto
+                    {
+                        Id = 0,
+                        Table_name = item.Id.ToString(),
+                        Name = "id",
+                        Label = string.Empty,
+                        Type = "INTEGER"
+                    }
+                }
             };
+            if(!entity.Fields.Any(x => x.Name == "id"))
+            {
+                entity.Fields.Add(
+                    new MetadataDto
+                    {
+                        Id = 0,
+                        Table_name = item.Id.ToString(),
+                        Name = "id",
+                        Label = string.Empty,
+                        Type = "INTEGER"
+                    });
+            }
+            return entity;
         }
 
         public static IEnumerable<EntityDTO> GetDTOs(IEnumerable<Entity> entities)
@@ -64,22 +85,33 @@ namespace CP.Final.Mincifra.Web.ApiModels
             return r;
         }
     }
+    public class MetadataDto
+    {
+        public long Id { get; set; }
+        public string Table_name { get; set; }
+        public string Name { get; set; }
+        public string Label { get; set; }
+        public string Icon { get; set; } = string.Empty;
+        public string Form_type { get; set; } = string.Empty;
+        public string Type { get; set; }
+        public bool Required { get; set; } = true;
+        public int Primary { get; set; } = 1;
+        public bool Is_foreign_key { get; set; } = false;
+        public bool Auto_increment { get; set; } = false;
+    }
     public class LinkDTO
     {
-        public Guid Id { get; set; }
-        [Required]
-        public Guid From { get; set; }
-        public Guid To { get; set; }
-        public LinkType Type { get; set; }
-
+        public string From_field { get; set; } = "id";
+        public string From_model { get; set; }
+        public string To_field { get; set; } = "id";
+        public string To_model { get; set; }
+        
         public static LinkDTO FromLink(Link item)
         {
             return new LinkDTO()
             {
-                Id = item.Id,
-                From = item.FromEntityId,
-                To = item.ToEntityId,
-                Type = item.Type
+                From_model = item.FromEntityId.ToString(),
+                To_model = item.ToEntityId.ToString()
             };
         }
     }
@@ -105,7 +137,7 @@ namespace CP.Final.Mincifra.Web.ApiModels
     }
     public class ResponseDTO
     {
-        public List<LinkDTO> Links { get; set; }
-        public List<EntityDTO> Nodes { get; set; }
+        public List<LinkDTO> Relations { get; set; }
+        public List<EntityDTO> Tables { get; set; }
     }
 }
