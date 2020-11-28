@@ -64,14 +64,26 @@ namespace CP.Final.Mincifra.Web.Api
         [HttpGet("{searchText}")]
         public async Task<IActionResult> Filtered(string searchText)
         {
-            IQueryable<Guid> filtredEntity = _repository.GetQuery<Entity>().Include(x => x.MetaDatas)
-                .WhereIf(searchText != null, x => x.MetaDatas.Where(y => y.Key.ToLower().Contains(searchText.ToLower())).Count() > 0)
-                .GroupBy(x => x.Id)
-                .Select(x => x.Key);
+            var rs = _repository.GetQuery<Entity>().Include(x => x.MetaDatas);
+            List<Guid> filteredEntity = new List<Guid>();
+            foreach (var e in rs)
+            {
+                foreach (var m in e.MetaDatas)
+                {
+                    if (m.Key.ToLower().Contains(searchText.ToLower())) filteredEntity.Add(e.Id);
+                }
+            }
+            //IQueryable<Guid> filtredEntity = rs
+            //    .WhereIf(searchText != null, x => x.MetaDatas.Where(y => y.Key.ToLower().Contains(searchText.ToLower())).Count() > 0)
+            //    .GroupBy(x => x.Id)
+            //    .Select(x => x.Key);
 
-            IEnumerable<EntityDTO> items = EntityDTO.GetDTOs(await _repository
-                .GetQuery<Entity>().Include(x => x.MetaDatas)
-                .WhereIf(searchText != null, x => filtredEntity.Contains(x.Id))
+            IEnumerable<EntityDTO> items = EntityDTO
+                .GetDTOs(
+                await _repository
+                .GetQuery<Entity>()
+                .Include(x => x.MetaDatas)
+                .WhereIf(searchText != null, x => filteredEntity.Contains(x.Id))
                 .ToListAsync());
 
             return Ok(items);
