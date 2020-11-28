@@ -1,8 +1,11 @@
-﻿using CP.Final.Mincifra.SharedKernel;
+﻿using CP.Final.Mincifra.Core.Entities;
+using CP.Final.Mincifra.SharedKernel;
 using CP.Final.Mincifra.SharedKernel.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace CP.Final.Mincifra.Infrastructure.Data
@@ -49,6 +52,16 @@ namespace CP.Final.Mincifra.Infrastructure.Data
         {
             _dbContext.Set<T>().Remove(entity);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<T>> ListWithIncludeAsync<T>(string path) where T : BaseEntity
+        {
+            return await _dbContext.Set<T>().Include(path).ToListAsync();
+        }
+
+        public IQueryable<T> GetQuery<T>() where T : BaseEntity
+        {
+            return _dbContext.Set<T>().AsNoTracking();
         }
     }
 }

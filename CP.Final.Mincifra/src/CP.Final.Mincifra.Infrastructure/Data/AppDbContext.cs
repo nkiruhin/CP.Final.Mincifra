@@ -26,6 +26,9 @@ namespace CP.Final.Mincifra.Infrastructure.Data
         }
 
         public DbSet<ToDoItem> ToDoItems { get; set; }
+        public DbSet<Entity> Entities { get; set; }
+        public DbSet<Link> Links { get; set; }
+        public DbSet<MetaData> MetaDatas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
