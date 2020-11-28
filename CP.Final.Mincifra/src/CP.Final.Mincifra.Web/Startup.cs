@@ -42,7 +42,7 @@ namespace CP.Final.Mincifra.Web
 
             services.AddControllersWithViews().AddNewtonsoftJson();
             services.AddRazorPages();
-
+            services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
@@ -88,7 +88,10 @@ namespace CP.Final.Mincifra.Web
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"));
-
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+            );
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();

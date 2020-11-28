@@ -56,8 +56,8 @@ namespace CP.Final.Mincifra.Web.Api
             var links = (await _repository.ListAsync<Link>()).Select(LinkDTO.FromLink);
             return Ok(new ResponseDTO
             {
-                Nodes = nodes.ToList(),
-                Links = links.ToList()
+                Relations = links.ToList(),
+                Tables = nodes.ToList()
             });
         }
 
