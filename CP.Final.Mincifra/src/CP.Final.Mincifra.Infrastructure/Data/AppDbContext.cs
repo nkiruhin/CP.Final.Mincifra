@@ -1,20 +1,11 @@
 ﻿using Ardalis.EFCore.Extensions;
 using CP.Final.Mincifra.Core.Entities;
-using CP.Final.Mincifra.SharedKernel;
-using CP.Final.Mincifra.SharedKernel.Interfaces;
-using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace CP.Final.Mincifra.Infrastructure.Data
 {
     public class AppDbContext : DbContext
     {
-        private readonly IDomainEventDispatcher _dispatcher;
-
         public AppDbContext(DbContextOptions options) : base(options)
         {
         }

@@ -38,8 +38,6 @@
     <Content Include="public\logo512.png" />
     <Content Include="public\manifest.json" />
     <Content Include="public\robots.txt" />
-    <Content Include="src\App.css" />
-    <Content Include="src\index.css" />
     <Content Include="src\logo.svg" />
     <Content Include="src\main.css" />
     <Content Include="tsconfig.json" />
@@ -55,13 +53,10 @@
     <Folder Include="src\nodes\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src\App.tsx" />
-    <TypeScriptCompile Include="src\DemoCanvasWidget.tsx" />
     <TypeScriptCompile Include="src\helpers\CanvasContainerWidget.tsx" />
     <TypeScriptCompile Include="src\helpers\Messenger.tsx" />
     <TypeScriptCompile Include="src\helpers\SerializeHelper.tsx" />
     <TypeScriptCompile Include="src\helpers\WorkspaceWidget.tsx" />
-    <TypeScriptCompile Include="src\index.tsx" />
     <TypeScriptCompile Include="src\main.tsx" />
     <TypeScriptCompile Include="src\models\Field.tsx" />
     <TypeScriptCompile Include="src\models\Link.tsx" />

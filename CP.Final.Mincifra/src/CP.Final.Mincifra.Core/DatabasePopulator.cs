@@ -1,6 +1,4 @@
-﻿using CP.Final.Mincifra.Core.Entities;
-using CP.Final.Mincifra.SharedKernel.Interfaces;
-using System.Linq;
+﻿using CP.Final.Mincifra.SharedKernel.Interfaces;
 
 namespace CP.Final.Mincifra.Core
 {

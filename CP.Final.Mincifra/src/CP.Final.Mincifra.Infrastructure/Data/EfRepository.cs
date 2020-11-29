@@ -1,11 +1,9 @@
-﻿using CP.Final.Mincifra.Core.Entities;
-using CP.Final.Mincifra.SharedKernel;
+﻿using CP.Final.Mincifra.SharedKernel;
 using CP.Final.Mincifra.SharedKernel.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace CP.Final.Mincifra.Infrastructure.Data
